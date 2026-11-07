@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Find and organize AI and machine learning internship opportunities." />
+  <title>AI Internship Matcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✳</span><span>Intern<span class="brand-accent">Match</span></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav>
+        <a class="nav-link active" href="#dashboard"><span>▦</span> Overview</a>
+        <a class="nav-link" href="#opportunities"><span>⌕</span> Find internships</a>
+        <a class="nav-link" href="#saved"><span>♡</span> Saved <span class="nav-count" id="savedCount">0</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon">✦</div>
+          <strong>Your next opportunity starts here.</strong>
+          <p>Explore roles, compare requirements and keep your search organized.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">AM</div>
+          <div><strong>Arsal Majeed</strong><small>AI / ML Student</small></div>
+          <span class="profile-dots">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div class="breadcrumb">Workspace <span>/</span> Overview</div>
+        <div class="top-actions"><span class="today-label" id="todayLabel"></span><button class="icon-button" id="themeToggle" aria-label="Toggle theme">◐</button></div>
+      </header>
+
+      <section class="welcome-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR CAREER SEARCH, SIMPLIFIED</div>
+          <h1>Find your place in <span>AI.</span></h1>
+          <p class="welcome-copy">Discover internship opportunities that match your skills and ambitions.</p>
+        </div>
+        <a class="primary-button" href="#opportunities">Explore opportunities <span>↗</span></a>
+      </section>
+
+      <section class="stats-grid" aria-label="Internship overview">
+        <article class="stat-card"><div class="stat-top"><span>Total opportunities</span><span class="stat-icon purple">▤</span></div><strong id="totalStat">0</strong><small>In this workspace</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Open applications</span><span class="stat-icon green">↗</span></div><strong id="openStat">0</strong><small>Marked as open</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Saved opportunities</span><span class="stat-icon orange">♡</span></div><strong id="savedStat">0</strong><small>For your shortlist</small></article>
+      </section>
+
+      <section class="content-section" id="opportunities">
+        <div class="section-heading">
+          <div><div class="eyebrow">OPPORTUNITY BOARD</div><h2>Explore internships</h2><p>Search and organize AI, machine learning and data opportunities.</p></div>
+          <button class="outline-button" id="addOpportunityBtn">＋ Add opportunity</button>
+        </div>
+
+        <div class="filter-panel">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search role, company or skill..." /></label>
+          <select id="locationFilter" aria-label="Filter by location"><option value="all">All locations</option><option value="Pakistan">Pakistan</option><option value="Remote">Remote</option><option value="International">International</option></select>
+          <select id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option value="Open">Open</option><option value="Closed">Closed</option><option value="Unverified">Unverified</option></select>
+          <select id="typeFilter" aria-label="Filter by field"><option value="all">All fields</option><option value="Artificial Intelligence">Artificial Intelligence</option><option value="Machine Learning">Machine Learning</option><option value="Data Science">Data Science</option><option value="Computer Vision">Computer Vision</option></select>
+        </div>
+
+        <div class="results-line"><span id="resultsText">Showing 0 opportunities</span><button class="text-button" id="clearFilters">Clear filters</button></div>
+        <div class="opportunity-grid" id="opportunityGrid"></div>
+        <div class="empty-state" id="emptyState" hidden><div class="empty-symbol">⌕</div><h3>No opportunities found</h3><p>Try changing your search or filters, or add an opportunity to your board.</p></div>
+      </section>
+
+      <section class="saved-section" id="saved">
+        <div class="saved-note"><span>ⓘ</span><div><strong>Verification matters</strong><p>This starter website stores opportunities you add in your browser. Confirm application status, eligibility and deadlines on the official organization website before applying. Demo entries are illustrative, not verified vacancies.</p></div></div>
+      </section>
+      <footer>AI Internship Matcher <span>•</span> Built for a smarter internship search</footer>
+    </main>
+  </div>
+
+  <dialog id="opportunityDialog">
+    <form id="opportunityForm" method="dialog">
+      <div class="dialog-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h2>Add an opportunity</h2></div><button type="button" class="close-button" id="closeDialog" aria-label="Close">×</button></div>
+      <label>Role / program title<input name="title" required placeholder="e.g. AI Research Intern" /></label>
+      <label>Organization<input name="company" required placeholder="Organization name" /></label>
+      <div class="form-row"><label>Location<select name="location"><option>Pakistan</option><option>Remote</option><option>International</option></select></label><label>Status<select name="status"><option>Unverified</option><option>Open</option><option>Closed</option></select></label></div>
+      <label>Field<select name="field"><option>Artificial Intelligence</option><option>Machine Learning</option><option>Data Science</option><option>Computer Vision</option></select></label>
+      <label>Official application URL<input name="url" type="url" placeholder="https://..." /></label>
+      <label>Deadline / notes<input name="deadline" placeholder="e.g. Check official website" /></label>
+      <p class="form-hint">Only mark an opportunity “Open” after checking the official source.</p>
+      <button class="primary-button submit-button" type="submit">Save opportunity <span>→</span></button>
+    </form>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+</html>
